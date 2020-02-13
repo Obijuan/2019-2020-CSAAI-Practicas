@@ -1,0 +1,18 @@
+/* Ponemos a cero todas las propiedades del cuerpo */
+/* Sin margen, sin relleno y sin borde              */
+body {
+  padding: 10px;
+  margin: 5px;
+  /*! border: solid; */
+  border-color: red;
+}
+
+/*  Propiedades de la caja del párrafo
+    Ponemos todo a cero
+*/
+p {
+  margin: 5px;
+  padding:5px;
+  border: solid;
+  border-color: green;
+}
