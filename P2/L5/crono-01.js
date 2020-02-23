@@ -1,0 +1,66 @@
+//-- Cronometro
+console.log("Ejecuitando JS...");
+
+//-- Elementos de la gui
+const gui = {
+  display : document.getElementById("display"),
+  start : document.getElementById("start"),
+  stop : document.getElementById("stop"),
+}
+
+//-- Objeto cronometro
+const crono = {
+
+  //-- Elemento donde mostrar el cronometro
+  display : gui.display,
+
+  //-- Tiempo
+  cent : 0,  //-- Centesimas
+  seg: 0,    //-- Segundos
+  min: 0,    //-- Minutos
+
+  //-- Temporizador
+  timer : null,
+
+  //-- Funcion que se ejecuta cada centesima
+  tic : function() {
+
+    //-- Incrementar en una centesima
+    this.cent += 1;
+
+    //-- 100 centésimas hacen 1 segundo
+    if (this.cent == 100) {
+      this.seg += 1;
+      this.cent = 0;
+    }
+
+    //-- 60 segundos hacen un minuto
+    if (this.seg == 60) {
+      this.min = 1;
+      this.seg = 0;
+    }
+
+    //-- Mostrar el valor actual
+    this.display.innerHTML = this.min + ":" + this.seg + ":" + this.cent
+  },
+
+}
+
+//-- Arranque del cronometro
+gui.start.onclick = () => {
+  console.log("Start!!");
+  if (!crono.timer) {
+    //-- Lanzamos el temporizador
+    crono.timer = setInterval(()=>{crono.tic()}, 10);
+  }
+}
+
+//-- Detener el cronómetro
+gui.stop.onclick = () => {
+  console.log("Stop!");
+  if (crono.timer) {
+    clearInterval(crono.timer);
+    crono.timer = null;
+    console.log("Paramos!");
+  }
+}
