@@ -44,23 +44,30 @@ const crono = {
     this.display.innerHTML = this.min + ":" + this.seg + ":" + this.cent
   },
 
+  start : function() {
+    if (!this.timer) {
+      //-- Lanzamos el temporizador
+      this.timer = setInterval(()=>{this.tic()}, 10);
+    }
+  },
+
+  stop : function() {
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+  }
+
 }
 
 //-- Arranque del cronometro
 gui.start.onclick = () => {
   console.log("Start!!");
-  if (!crono.timer) {
-    //-- Lanzamos el temporizador
-    crono.timer = setInterval(()=>{crono.tic()}, 10);
-  }
+  crono.start();
 }
 
 //-- Detener el cronómetro
 gui.stop.onclick = () => {
   console.log("Stop!");
-  if (crono.timer) {
-    clearInterval(crono.timer);
-    crono.timer = null;
-    console.log("Paramos!");
-  }
+  crono.stop();
 }
