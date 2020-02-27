@@ -7,18 +7,18 @@ igual = document.getElementById("igual")
 clear = document.getElementById("clear")
 
 // -- Insertar digito 1
-boton1.onclick = () => {
-  display.innerHTML += "1";
+boton1.onclick = (ev) => {
+  display.innerHTML += ev.target.value;
 }
 
 //-- Insertar digito 2
-boton2.onclick = () => {
-  display.innerHTML += "2";
+boton2.onclick = (ev) => {
+  display.innerHTML += ev.target.value;
 }
 
 //-- Insertar simbolo de sumar
-suma.onclick = () => {
-  display.innerHTML += "+";
+suma.onclick = (ev) => {
+  display.innerHTML += ev.target.value;
 }
 
 //-- Evaluar la expresion

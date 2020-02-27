@@ -3,8 +3,10 @@ console.log("Ejecutando JS.......");
 const display = document.getElementById("display");
 const suma = document.getElementById("suma");
 const igual = document.getElementById("igual");
-botones = document.getElementsByClassName("digito");
+clear = document.getElementById("clear")
+let digitos = document.getElementsByClassName("digito");
 
+//-- Estados de la calculadora
 const ESTADO = {
   INIT: 0,
   OP1: 1,
@@ -16,14 +18,15 @@ const ESTADO = {
 //-- Variable de estado
 let estado = ESTADO.INIT;
 
-for (i=0; i<botones.length; i++) {
-  console.log(botones[i]);
-  botones[i].onclick = (ev) => {
+for (i=0; i<digitos.length; i++) {
+  console.log(digitos[i]);
+  digitos[i].onclick = (ev) => {
     number(ev.target.value)
     console.log(ev.target.value);
   }
 }
 
+//-- Ha llegado un dígito
 function number(num)
 {
   //-- Segun el estado hacemos una cosa u otra
@@ -52,4 +55,10 @@ igual.onclick = () => {
     display.innerHTML = eval(display.innerHTML);
     estado = ESTADO.INIT;
   }
+}
+
+//-- Reset
+clear.onclick = () => {
+  display.innerHTML = "0";
+  estado == ESTADO.INIT;
 }

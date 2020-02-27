@@ -1,24 +1,23 @@
 console.log("Ejecutando JS...");
 
 display = document.getElementById("display")
-boton1 = document.getElementById("boton1")
 suma = document.getElementById("suma")
 igual = document.getElementById("igual")
 clear = document.getElementById("clear")
 
-// -- Insertar digito 1
-boton1.onclick = () => {
-  display.innerHTML += "1";
-}
+//-- Crear un array con todos los elementos
+//-- de la clase digito
+digito = document.getElementsByClassName("digito")
 
-//-- Insertar digito 2
-boton2.onclick = () => {
-  display.innerHTML += "2";
+for (i=0; i<digito.length; i++) {
+  digito[i].onclick = (ev) => {
+    display.innerHTML += ev.target.value;
+  }
 }
 
 //-- Insertar simbolo de sumar
-suma.onclick = () => {
-  display.innerHTML += "+";
+suma.onclick = (ev) => {
+  display.innerHTML += ev.target.value;
 }
 
 //-- Evaluar la expresion
