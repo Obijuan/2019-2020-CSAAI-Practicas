@@ -11,7 +11,6 @@ const ESTADO = {
   INIT: 0,
   OP1: 1,
   OPERATION: 2,
-  OP2_INIT: 3,
   OP2: 4,
 }
 
@@ -33,9 +32,9 @@ function number(num)
   if (estado == ESTADO.INIT) {
     display.innerHTML = num;
     estado = ESTADO.OP1;
-  } else if (estado == ESTADO.OP1 || estado == ESTADO.OP2 || estado == ESTADO.OP2_INIT) {
+  } else if (estado == ESTADO.OP1 || estado == ESTADO.OP2 || estado == ESTADO.OPERATION) {
     display.innerHTML += num;
-    if (estado == ESTADO.OP2_INIT) {
+    if (estado == ESTADO.OPERATION) {
       estado = ESTADO.OP2;
     }
   }
@@ -45,7 +44,7 @@ suma.onclick = () => {
   console.log("Suma....");
   if (estado == ESTADO.OP1) {
     display.innerHTML += "+";
-    estado = ESTADO.OP2_INIT;
+    estado = ESTADO.OPERATION;
   }
 }
 
