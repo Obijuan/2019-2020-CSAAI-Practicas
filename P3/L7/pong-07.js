@@ -2,7 +2,6 @@ console.log("Ejecutando JS...");
 
 //-- Obtener el objeto canvas
 const canvas = document.getElementById("canvas");
-const paso = document.getElementById("paso");
 
 //-- Sus dimensiones las hemos fijado en el fichero
 //-- HTML. Las imprimimos en la consola
@@ -79,6 +78,9 @@ function animacion()
 setInterval(()=>{
   animacion();
 },16);
+
+//-- Obtener el boton de dar un "paso"
+const paso = document.getElementById("paso");
 
 //-- Botón de dar un Paso: Cada vez que lo apretamos
 //-- la bola avanza 5 píxeles
