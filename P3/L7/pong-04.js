@@ -36,9 +36,9 @@ ctx.beginPath();
 
 //-- Estilo de la linea: discontinua
 //-- Trazos de 10 pixeles, y 10 de separacion
-ctx.setLineDash([10, 5]);
+ctx.setLineDash([10, 10]);
 ctx.strokeStyle = 'white';
-ctx.lineWidth = 10;
+ctx.lineWidth = 2;
 //-- Punto superior de la linea. Su coordenada x está en la mitad
 //-- del canvas
 ctx.moveTo(canvas.width/2, 0);
