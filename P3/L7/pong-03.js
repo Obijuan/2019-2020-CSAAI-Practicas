@@ -26,7 +26,7 @@ ctx.fillStyle='white';
 ctx.rect(50, 100, 10, 40);
 
 //-- Raqueta derecha
-ctx.rect(550, 300, 10, 40);
+ctx.rect(540, 300, 10, 40);
 
 //-- Pintar!
 ctx.fill();
