@@ -67,7 +67,6 @@ function animacion()
 
   //-- Actualizar las posiciones de los objetos móviles
 
-
   //-- Comprobar si la bola ha alcanzado el límite derecho
   //-- Si es así, se cambia de signo la velocidad, para
   // que "rebote" y vaya en el sentido opuesto
