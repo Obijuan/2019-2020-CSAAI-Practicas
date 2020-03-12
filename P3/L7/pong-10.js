@@ -68,11 +68,10 @@ function animacion()
   //-- Actualizar las posiciones de los objetos móviles
 
 
-  //-- Comprobar si la si siguiente posicion de la
-  //-- pelo sobrepasa algún límite. Si es así, se cambia
-  //-- de signo la velocidad, para que "rebote" y vaya en el
-  //-- sentido opuesto
-  if (bola_x > canvas.width - bola_vx) {
+  //-- Comprobar si la bola ha alcanzado el límite derecho
+  //-- Si es así, se cambia de signo la velocidad, para
+  // que "rebote" y vaya en el sentido opuesto
+  if (bola_x >= canvas.width) {
     //-- Hay colisión. Cambiar el signo de la bola
     bola_vx = bola_vx * -1;
   }
@@ -101,6 +100,6 @@ const sacar = document.getElementById("sacar");
 //-- También restablecemos la posicion inicial
 sacar.onclick = () => {
   bola_x = 50;
-  bola_vx = 4;
+  bola_vx = 6;
   console.log("Saque!");
 }
