@@ -2,7 +2,7 @@ console.log("Ejecutando JS...");
 
 //-- Acceder al cuerpo del documento HTML
 //-- Es el primer elemento, porque sólo hay un cuerpo
-body = document.getElementsByTagName('body')[0]
+const body = document.getElementsByTagName('body')[0]
 
 //-- Funcion de retrollamada de tecla pulsada
 window.onkeydown = (e) => {
