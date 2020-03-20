@@ -123,6 +123,8 @@ function animacion()
 
   //-- Dibujar el nuevo frame
   draw();
+
+  window.requestAnimationFrame(animacion);
 }
 
 //-- Inicializa la bola: Llevarla a su posicion inicial
@@ -138,9 +140,7 @@ raqD.y_ini = 300;
 raqD.init();
 
 //-- Arrancar la animación
-setInterval(()=>{
-  animacion();
-},16);
+animacion();
 
 //-- Retrollamada de las teclas
 window.onkeydown = (e) => {
