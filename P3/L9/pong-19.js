@@ -164,7 +164,13 @@ window.onkeydown = (e) => {
     case "l":
       raqD.v = raqD.v_ini;
       break;
-    case " ":
+    case "s":
+
+       //-- Eliminar el comportamiento por defecto de la tecla
+       //-- El espacio se usa como click, normalmente. Eliminamos
+       //-- este comportamiento
+       e.preventDefault();
+       console.log("cojones!");
 
       //-- El saque solo funciona en el estado de SAQUE
       if (estado == ESTADO.SAQUE) {
@@ -180,6 +186,8 @@ window.onkeydown = (e) => {
 
         //-- Cambiar al estado de jugando!
         estado = ESTADO.JUGANDO;
+
+        return false;
       }
     default:
   }
@@ -202,6 +210,8 @@ const start = document.getElementById("start");
 
 start.onclick = () => {
   estado = ESTADO.SAQUE;
+  console.log("SAQUE!");
+  canvas.focus();
 }
 
 //-- Boton de stop
@@ -211,4 +221,5 @@ stop.onclick = () => {
   //-- Volver al estado inicial
   estado = ESTADO.INIT;
   bola.init();
+  start.disabled = false;
 }
