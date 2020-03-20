@@ -166,12 +166,6 @@ window.onkeydown = (e) => {
       break;
     case "s":
 
-       //-- Eliminar el comportamiento por defecto de la tecla
-       //-- El espacio se usa como click, normalmente. Eliminamos
-       //-- este comportamiento
-       e.preventDefault();
-       console.log("cojones!");
-
       //-- El saque solo funciona en el estado de SAQUE
       if (estado == ESTADO.SAQUE) {
         //-- Reproducir sonido
