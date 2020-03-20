@@ -1,3 +1,28 @@
+//-- Creamos un wrapper para soportar requestAnimationFrame en los distintos navegadores y si
+//-- fuera un navegador antiguo, sin soporte de éste, utilizaremos setTimeout
+//--
+//-- Las ventajas más importantes de utilizar requestAnimationFrame frente a setTimeout son:
+//--
+//--     - El navegador está optimizado para ello y utilzará recursos hardware gráficos, por lo
+//--       que las animaciones serán más suaves
+//--     - Si cambiamos de pestaña o el navegador pas a segundo plano, la animación se para  por lo
+//--       que la CPU quedará libre
+//--     - Por lo anterior en dispositivos móviles, gastará menos batería
+//--     - Mucho más preciso que setTimeout (éste último depende del main loop y lo ocupado que esté,
+//--       el intervalo indicado, sólo es la medida deseable pero tus funciones pueden tardar más de
+//--       lo indicado en ejecutarse).
+//--
+//-- requestAnimFrame framerate is about 60FPS (if your logic is enought faster)
+
+window.requestAnimFrame = (function () {
+  return window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    function (callback) {
+      window.setTimeout(callback, 1000 / 60);
+    };
+})();
+
 
 //-- Pintar todos los objetos en el canvas
 function draw() {
@@ -19,10 +44,10 @@ function draw() {
   ctx.lineWidth = 2;
   //-- Punto superior de la linea. Su coordenada x está en la mitad
   //-- del canvas
-  ctx.moveTo(canvas.width/2, 0);
+  ctx.moveTo(canvas.width / 2, 0);
 
   //-- Dibujar hasta el punto inferior
-  ctx.lineTo(canvas.width/2, canvas.height);
+  ctx.lineTo(canvas.width / 2, canvas.height);
   ctx.stroke();
 
   //------ Dibujar el tanteo
@@ -32,18 +57,16 @@ function draw() {
   ctx.fillText(puntosD, 340, 80);
 }
 
-function colision(bola, raq)
-{
+function colision(bola, raq) {
   //-- Comprobar si hay colisión con la raqueta izquierda
-  if (bola.x >= raq.x && bola.x <=(raq.x + raq.width) &&
-      bola.y >= raq.y && bola.y <=(raq.y + raq.height)) {
+  if (bola.x >= raq.x && bola.x <= (raq.x + raq.width) &&
+    bola.y >= raq.y && bola.y <= (raq.y + raq.height)) {
     return true;
   }
 }
 
 //---- Bucle principal de la animación
-function animacion()
-{
+function animacion() {
 
   //-- Actualizar la raqueta con la velocidad actual
   raqI.update();
@@ -77,10 +100,10 @@ function animacion()
 
   //-- Comprobar la solicion de la bola con cada una de las raquetas
   [raqI, raqD].forEach(raq => {
-     if (colision(bola, raq)) {
-       bola.vx = bola.vx * -1;
-       bola.vy = raq.v;
-     }
+    if (colision(bola, raq)) {
+      bola.vx = bola.vx * -1;
+      bola.vy = raq.v;
+    }
   });
 
   //-- Actualizar coordenada x de la bola, en funcion de
@@ -88,10 +111,13 @@ function animacion()
   bola.update()
 
   //-- Borrar la pantalla
-  ctx.clearRect(0,0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   //-- Dibujar el nuevo frame
   draw();
+
+  // Bucle de animación
+  window.requestAnimationFrame(animacion);
 }
 
 //-- Obtener el objeto canvas
@@ -111,17 +137,13 @@ const raqD = new Raqueta(ctx, 540, 300, "ArrowUp", "ArrowDown");
 let puntosI = 0;
 let puntosD = 0;
 
-//-- Arrancar la animación
-setInterval(()=>{
-  animacion();
-},16);
 
 //-- Retrollamada de las teclas
 window.onkeydown = (e) => {
 
   //-- Comprobar las teclas de cada raqueta
   [raqI, raqD].forEach(raq => {
-    switch(e.key) {
+    switch (e.key) {
       case raq.tecla_up:
         raq.v = raq.v_ini * -1;
         return;
@@ -152,9 +174,12 @@ window.onkeyup = (e) => {
   //-- Comprobar si la liberacion es de las raquetas
   //-- Si es así, se pone su velocidad a 0
   [raqI, raqD].forEach((raq, i) => {
-    if (e.key == raq.tecla_up || e.key == raq.tecla_down){
+    if (e.key == raq.tecla_up || e.key == raq.tecla_down) {
       //-- Quitar velocidad de la raqueta
       raq.v = 0;
     }
   });
 }
+
+//-- Arrancar la animación
+animacion();
